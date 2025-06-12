@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CASTA CORP Weather</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    body {
+        font-size:2vw;
+        text-align: center;
+        color:black;
+        background-color: white;
+    }
+	table, th, td {
+	  margin-left: auto;
+	  margin-right: auto;
+	  text-align: center;
+	  border: 1px solid black;
+	}
+</style>
+<body style="text-align:center">
+	<h2 style="color:green">Weather (CDMX)</h2>
+	<p><a href="https://open-meteo.com/">Powered by Open-Meteo</a></p>
+	<p>@2025 CASTA CORP</p>
+	<script>
+		fetch('https://api.open-meteo.com/v1/forecast?latitude=19.43411&longitude=-99.20024&hourly=temperature_2m,precipitation_probability')
+		  .then((res) => {
+			return res.text()
+		  }).then((data) => {
+			const cjson = JSON.parse(data);
+			const cti = cjson.hourly.time;
+			const cte = cjson.hourly.temperature_2m;
+			const cpp = cjson.hourly.precipitation_probability;
+			let txt = "";
+			for (let i = 0; i < cti.length; i++) {
+				txt += "<tr><td>" + cti[i].replace('T', ' ') + "</td><td>" + cte[i] + " °C </td><td>" + cpp[i] + "% </td></tr>";
+			}
+			let txtdata = "<table><tr><th>Date/Time</th><th>Temp (°C)</th><th>Rain (%)</th></tr>" + txt + "</table>";
+			document.body.innerHTML += (txtdata)
+		  })
+		  .catch((err) => console.debug(err));
+	</script>
+</body>
+</html>
