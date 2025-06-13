@@ -24,7 +24,7 @@
 	<p><a href="https://open-meteo.com/">Powered by Open-Meteo</a></p>
 	<p>@2025 CASTA CORP</p>
 	<script>
-		fetch('https://api.open-meteo.com/v1/forecast?latitude=19.43411&longitude=-99.20024&hourly=temperature_2m,precipitation_probability')
+		fetch('https://api.open-meteo.com/v1/forecast?latitude=19.43411&longitude=-99.20024&hourly=temperature_2m,precipitation_probability&current=temperature_2m,precipitation&timezone=auto&forecast_days=3')
 		  .then((res) => {
 			return res.text()
 		  }).then((data) => {
