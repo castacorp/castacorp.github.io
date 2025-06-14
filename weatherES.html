@@ -79,11 +79,11 @@
 	}
 </style>
 <body style="text-align:center">
-	<h2 style="color:green">Weather</h2>
+	<h2 style="color:green">Pronostico del Clima</h2>
 	<input class='input-1' id='ilocation'></input>
-	<button class='button-3' onclick="getWeather()">Get Weather</button>
+	<button class='button-3' onclick="getWeather()">Pronostico</button>
 	<p><a href="https://open-meteo.com/">Powered by Open-Meteo</a></p>
-	<p><a href="index.html">Home</a></p>
+	<p><a href="indexES.html">Inicio</a></p>
 	<p>@2025 CASTA CORP</p>
 	<script>
 		function getWeather() {
@@ -93,7 +93,7 @@
 				return res.text()
 			  }).then((data) => {
 				
-				let b = "<h2 style='color:green'>Weather</h2><input class='input-1' id='ilocation'></input><button class='button-3' onclick='getWeather()'>Get Weather</button><p><a href='https://open-meteo.com/'>Powered by Open-Meteo</a></p><p><a href='index.html'>Home</a></p><p>@2025 CASTA CORP</p>";
+				let b = "<h2 style='color:green'>Pronostico del Clima</h2><input class='input-1' id='ilocation'></input><button class='button-3' onclick='getWeather()'>Pronostico</button><p><a href='https://open-meteo.com/'>Powered by Open-Meteo</a></p><p><a href='indexES.html'>Inicio</a></p><p>@2025 CASTA CORP</p>";
 				document.body.innerHTML = (b)
 			  
 				const cjson = JSON.parse(data);
@@ -101,7 +101,7 @@
 				const cla = cjson.results[0].latitude;
 				const clo = cjson.results[0].longitude;
 				let txt = "<tr><td>" + cna + "</td><td>" + cla + "</td><td>" + clo + "% </td></tr>";
-				let txtdata = "<table><tr><th>Name</th><th>latitude</th><th>Longitude</th></tr>" + txt + "</table>";
+				let txtdata = "<table><tr><th>Ubicacion</th><th>Latitud</th><th>Longitud</th></tr>" + txt + "</table>";
 				document.body.innerHTML += (txtdata)
 				
 				fetch('https://api.open-meteo.com/v1/forecast?latitude='+ cla +'&longitude=' + clo + '&hourly=temperature_2m,precipitation_probability&current=temperature_2m,precipitation&timezone=auto&forecast_days=2')
@@ -116,7 +116,7 @@
 					for (let i = 0; i < cti.length; i++) {
 						txt2 += "<tr><td>" + cti[i].replace('T', ' ') + "</td><td>" + cte[i] + " °C </td><td>" + cpp[i] + "% </td></tr>";
 					}
-					let txtdata2 = "<table><tr><th>Date/Time</th><th>Temp (°C)</th><th>Rain (%)</th></tr>" + txt2 + "</table>";
+					let txtdata2 = "<table><tr><th>Fecha/Hora</th><th>Temp (°C)</th><th>Lluvia (%)</th></tr>" + txt2 + "</table>";
 					document.body.innerHTML += (txtdata2)
 				  })
 				  .catch((err2) => console.debug(err2));
